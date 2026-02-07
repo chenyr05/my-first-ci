@@ -1,0 +1,31 @@
+name: My First CI Pipeline
+on: [push]
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Step 1 - 打印信息
+        run: echo "🎯 这就是 CI！每次提交都会运行"
+
+      - name: Step 2 - 模拟构建
+        run: |
+          echo "模拟安装依赖..."
+          echo "模拟编译代码..."
+          echo "📦 构建完成！"
+
+      - name: Step 3 - 生成报告
+        run: |
+          echo "📊 测试报告：" > report.md
+          echo "- ✅ 所有检查通过" >> report.md
+          echo "- 🚀 可以部署了" >> report.md
+          cat report.md
+
+      - name: Step 4 - 上传产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-report
+          path: report.md
